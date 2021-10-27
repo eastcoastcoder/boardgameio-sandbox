@@ -1,20 +1,12 @@
-/*
- * Copyright 2018 The boardgame.io Authors.
- *
- * Use of this source code is governed by a MIT-style
- * license that can be found in the LICENSE file or at
- * https://opensource.org/licenses/MIT.
- */
-
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Client } from 'boardgame.io/react-native';
-import logo from './logo.png';
 
+import logo from '../../assets/images/logo.png';
 import TicTacToe from './game';
 import Board from './board';
 
-const App = Client({
+const TicTacView = Client({
   game: TicTacToe,
   board: Board,
 });
@@ -22,7 +14,7 @@ const App = Client({
 const Singleplayer = () => (
   <View style={styles.container}>
     <Image source={logo} style={styles.logo} />
-    <App matchID="single" />
+    <TicTacView matchID="single" />
   </View>
 );
 

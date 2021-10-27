@@ -1,21 +1,14 @@
 {
   "expo": {
-    "name": "react-native",
-    "slug": "react-native",
-    "privacy": "public",
-    "packagerOpts": {
-      "projectRoots": "",
-      "config": "rn-cli.config.js"
-    },
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "name": "my-app",
+    "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -28,6 +21,16 @@
     "ios": {
       "supportsTablet": true
     },
-    "sdkVersion": "42.0.0"
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "sdkVersion": "43.0.0",
+    "entryPoint": ".vscode/exponentIndex.js"
   }
 }
