@@ -3,13 +3,21 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
 
+// Uncomment connectfour when implemented
+const gameObj = {
+  'tictactoe': 'Tic-Tac-Toe',
+  // 'connectfour': 'Connect Four',
+};
+
 export default function StartScreen({ navigation }: RootStackScreenProps<'Start'>) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome, choose a game here</Text>
-      <TouchableOpacity onPress={() => navigation.replace('Root')} style={styles.link}>
-        <Text style={styles.linkText}>Tic-Tac-Toe</Text>
-      </TouchableOpacity>
+      {Object.entries(gameObj).map(([gameKey, gameName]) => (
+        <TouchableOpacity key={gameName} onPress={() => navigation.push('Root', { gameKey, gameName })} style={styles.link}>
+          <Text style={styles.linkText}>{gameName}</Text>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 }
