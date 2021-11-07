@@ -10,96 +10,103 @@ import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-class Board extends React.Component {
-  static propTypes = {
-    G: PropTypes.any.isRequired,
-    ctx: PropTypes.any.isRequired,
-    moves: PropTypes.any.isRequired,
-    playerID: PropTypes.string,
-    isActive: PropTypes.bool,
-    isMultiplayer: PropTypes.bool,
-    isConnected: PropTypes.bool,
+const Board = ({
+  ctx,
+  isMultiplayer,
+  isConnected,
+  G,
+  moves,
+  playerID,
+  isActive,
+}) => {
+  let player = null;
+  let disconnected = null;
+  let winner = null;
+  const tbody = [];
+  const marker = {
+    0: 'X',
+    1: 'O',
   };
 
-  onClick = (id) => {
-    if (this.isActive(id)) {
-      this.props.moves.clickCell(id);
-    }
-  };
-
-  isActive(id) {
-    if (!this.props.isActive) return false;
-    if (this.props.G.cells[id] !== null) return false;
-    return true;
-  }
-
-  render() {
-    const tbody = [];
-    const marker = {
-      0: 'X',
-      1: 'O',
-    };
-    for (let i = 0; i < 3; i++) {
-      const cells = [];
-      for (let j = 0; j < 3; j++) {
-        const id = 3 * i + j;
-        cells.push(
-          <TouchableHighlight
-            key={id}
-            onPress={() => this.onClick(id)}
-            style={[styles.cell, styles[`cell${id}`]]}
-            underlayColor="transparent"
-          >
-            <Text style={styles.value}>{marker[this.props.G.cells[id]]}</Text>
-          </TouchableHighlight>
-        );
-      }
-      tbody.push(
-        <View key={i} style={styles.row}>
-          {cells}
-        </View>
+  for (let i = 0; i < 3; i++) {
+    const cells = [];
+    for (let j = 0; j < 3; j++) {
+      const id = 3 * i + j;
+      cells.push(
+        <TouchableHighlight
+          key={id}
+          onPress={() => onClick(id)}
+          style={[styles.cell, styles[`cell${id}`]]}
+          underlayColor="transparent"
+        >
+          <Text style={styles.value}>{marker[G.cells[id]]}</Text>
+        </TouchableHighlight>
       );
     }
-
-    let disconnected = null;
-    if (this.props.isMultiplayer && !this.props.isConnected) {
-      disconnected = (
-        <Text id="disconnected" style={styles.infoText}>
-          Disconnected!
-        </Text>
-      );
-    }
-
-    let winner = null;
-    if (this.props.ctx.gameover !== undefined) {
-      winner = (
-        <Text id="winner" style={styles.infoText}>
-          Winner: {marker[this.props.ctx.gameover]}
-        </Text>
-      );
-    }
-
-    let player = null;
-    if (this.props.playerID !== null) {
-      player = (
-        <Text id="player" style={styles.infoText}>
-          Player: {this.props.playerID}
-        </Text>
-      );
-    }
-
-    return (
-      <View>
-        <View id="board">{tbody}</View>
-        <View style={styles.info}>
-          {player}
-          {winner}
-          {disconnected}
-        </View>
+    tbody.push(
+      <View key={i} style={styles.row}>
+        {cells}
       </View>
     );
   }
+
+  if (isMultiplayer && !isConnected) {
+    disconnected = (
+      <Text id="disconnected" style={styles.infoText}>
+        Disconnected!
+      </Text>
+    );
+  }
+
+  if (ctx.gameover !== undefined) {
+    winner = (
+      <Text id="winner" style={styles.infoText}>
+        Winner: {marker[ctx.gameover]}
+      </Text>
+    );
+  }
+
+  if (playerID !== null) {
+    player = (
+      <Text id="player" style={styles.infoText}>
+        Player: {playerID}
+      </Text>
+    );
+  }
+
+  const onClick = (id) => {
+    if (isActiveCheck(id)) {
+      moves.clickCell(id);
+    }
+  };
+
+  const isActiveCheck = (id) => {
+    if (!isActive) return false;
+    if (G.cells[id] !== null) return false;
+    return true;
+  }
+
+  return (
+    <View>
+      <View id="board">{tbody}</View>
+      <View style={styles.info}>
+        {player}
+        {winner}
+        {disconnected}
+      </View>
+    </View>
+  );
 }
+
+Board.propTypes = {
+  G: PropTypes.any.isRequired,
+  ctx: PropTypes.any.isRequired,
+  moves: PropTypes.any.isRequired,
+  playerID: PropTypes.string,
+  isActive: PropTypes.bool,
+  isMultiplayer: PropTypes.bool,
+  isConnected: PropTypes.bool,
+};
 
 const styles = StyleSheet.create({
   row: {

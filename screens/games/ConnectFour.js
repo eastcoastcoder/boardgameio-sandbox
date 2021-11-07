@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  */
 
-function IsVictory(cells) {
+const IsVictory = (cells) => {
   const positions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -17,7 +17,6 @@ function IsVictory(cells) {
     [0, 4, 8],
     [2, 4, 6],
   ];
-
   for (let pos of positions) {
     const symbol = cells[pos[0]];
     let winner = symbol;
@@ -29,31 +28,27 @@ function IsVictory(cells) {
     }
     if (winner != null) return true;
   }
-
   return false;
 }
 
 const ConnectFour = {
   name: 'connect-four',
-
   setup: () => ({
     cells: new Array(9).fill(null),
   }),
-
   moves: {
     clickCell(G, ctx, id) {
       const cells = [...G.cells];
-
       if (cells[id] === null) {
         cells[id] = ctx.currentPlayer;
       }
-
       return { ...G, cells };
     },
   },
-
-  turn: { minMoves: 1, maxMoves: 1 },
-
+  turn: {
+    minMoves: 1,
+    maxMoves: 1,
+  },
   endIf: (G, ctx) => {
     if (IsVictory(G.cells)) {
       return ctx.currentPlayer;
