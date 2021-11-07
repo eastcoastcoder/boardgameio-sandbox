@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, Button } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
 
@@ -14,9 +14,13 @@ export default function StartScreen({ navigation }: RootStackScreenProps<'Start'
     <View style={styles.container}>
       <Text style={styles.title}>Welcome, choose a game here</Text>
       {Object.entries(gameObj).map(([gameKey, gameName]) => (
-        <TouchableOpacity key={gameName} onPress={() => navigation.push('Root', { gameKey, gameName })} style={styles.link}>
-          <Text style={styles.linkText}>{gameName}</Text>
-        </TouchableOpacity>
+        <View key={gameName}>
+          <View style={styles.separator} />
+          <Button
+            onPress={() => navigation.push('Root', { gameKey, gameName })}
+            title={gameName}
+          />
+        </View>
       ))}
     </View>
   );
@@ -33,12 +37,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-  linkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: '#737373',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });

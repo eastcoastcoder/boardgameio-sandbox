@@ -50,30 +50,6 @@ const Board = ({
     );
   }
 
-  if (isMultiplayer && !isConnected) {
-    disconnected = (
-      <Text id="disconnected" style={styles.infoText}>
-        Disconnected!
-      </Text>
-    );
-  }
-
-  if (ctx.gameover !== undefined) {
-    winner = (
-      <Text id="winner" style={styles.infoText}>
-        Winner: {marker[ctx.gameover]}
-      </Text>
-    );
-  }
-
-  if (playerID !== null) {
-    player = (
-      <Text id="player" style={styles.infoText}>
-        Player: {playerID}
-      </Text>
-    );
-  }
-
   const onClick = (id) => {
     if (isActiveCheck(id)) {
       moves.clickCell(id);
@@ -90,9 +66,21 @@ const Board = ({
     <View>
       <View id="board">{tbody}</View>
       <View style={styles.info}>
-        {player}
-        {winner}
-        {disconnected}
+        {playerID !== null && (
+          <Text id="player" style={styles.infoText}>
+            Player: {playerID}
+          </Text>
+        )}
+        {ctx.gameover !== undefined && (
+          <Text id="winner" style={styles.infoText}>
+            Winner: {marker[ctx.gameover]}
+          </Text>
+        )}
+        {isMultiplayer && !isConnected && (
+          <Text id="disconnected" style={styles.infoText}>
+            Disconnected!
+          </Text>
+        )}
       </View>
     </View>
   );
