@@ -19,6 +19,8 @@ const Board = ({
   playerID,
   isActive,
 }) => {
+  const numOfRows = 3;
+  const numOfColumns = 3;
   let player = null;
   let disconnected = null;
   let winner = null;
@@ -28,10 +30,10 @@ const Board = ({
     1: 'O',
   };
 
-  for (let i = 0; i < 3; i++) {
+  for (let row = 0; row < numOfRows; row++) {
     const cells = [];
-    for (let j = 0; j < 3; j++) {
-      const id = 3 * i + j;
+    for (let col = 0; col < numOfColumns; col++) {
+      const id = 3 * row + col;
       cells.push(
         <TouchableHighlight
           key={id}
@@ -44,7 +46,7 @@ const Board = ({
       );
     }
     tbody.push(
-      <View key={i} style={styles.row}>
+      <View key={row} style={styles.row}>
         {cells}
       </View>
     );
@@ -66,6 +68,7 @@ const Board = ({
     <View>
       <View id="board">{tbody}</View>
       <View style={styles.info}>
+        {!ctx.gameover && <Text>{`Player ${Number(ctx.currentPlayer) + 1}'s Turn`}</Text>}
         {playerID !== null && (
           <Text id="player" style={styles.infoText}>
             Player: {playerID}

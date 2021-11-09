@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, Button, Text, View, StyleSheet } from 'react-native';
+import { Image, Button, Text, View, StyleSheet, TouchableHighlight } from 'react-native';
 import { emptyCell, numOfColumns, numOfRows, p1disc, p2disc, playerDiscLookup } from './constants';
 // Discs from http://fontawesome.io/icon/circle/
 import WhiteDisc from '../../../assets/images/circular-shape-silhouette-white.png';
@@ -35,44 +35,25 @@ const ConnectFourBoard = ({
           ? <Text>Winner: Player {playerDiscLookup[ctx.currentPlayer]}</Text>
           : <Text>Current Player: Player {playerDiscLookup[ctx.currentPlayer]}</Text>}
       </View>
-      <View style={{ flexDirection: 'row' }}>
-        {Array(numOfColumns).fill().map((_, i) => i).map(idx =>
-          <ColumnSelector
-            active={isActiveCheck(idx)}
-            handleClick={() => onClick(idx)}
-            key={idx}
-          />
-        )}
-      </View>
-      <Grid grid={G.grid} />
+      <Grid handleClick={onClick} grid={G.grid} />
     </View>
   );
 }
 
-// TODO: Remove this, make columns touchable opacities
-const ColumnSelector = ({ active, handleClick }) => {
-  return (
-    <View style={styles.columnSelectorContainer}>
-      <Button disabled={!active} onClick={handleClick} style={styles.columnSelector} title="O" />
-    </View>
-  );
-}
-
-const Grid = ({ grid }) => {
-  let rows = [];
-  for (let rowIdx = 0; rowIdx < numOfRows; rowIdx++) {
-    rows = rows.concat(
-      <View key={rowIdx}>
-        <Row row={grid[rowIdx]} />
+const Grid = ({ grid, handleClick }) => {
+  console.log(grid);
+  const cells = [];
+  for (let row = 0; row < numOfRows; row++) {
+    cells.push(
+      <View style={styles.row} key={row}>
+        {grid[row].map((c, idx) => <Cell id={idx} onClick={handleClick} cell={c} key={idx} />)}
       </View>
     );
   }
-  return rows;
+  return cells;
 }
 
-const Row = ({ row }) => row.map((c, idx) => <Cell cell={c} key={idx} />);
-
-const Cell = ({ cell }) => {
+const Cell = ({ cell, onClick, id }) => {
   let cellImage;
   switch (cell) {
     case p1disc:
@@ -86,10 +67,16 @@ const Cell = ({ cell }) => {
       break;
   }
   return (
-    <Image
-      source={cellImage}
-      style={styles.disc}
-    />
+    <TouchableHighlight
+      onPress={() => onClick(id)}
+      style={[styles.cell, styles[`cell${id}`]]}
+      underlayColor="transparent"
+    >
+      <Image
+        source={cellImage}
+        style={styles.disc}
+      />
+    </TouchableHighlight>
   );
 }
 
@@ -104,17 +91,25 @@ ConnectFourBoard.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  columnSelector: {
-    width: 50,
-  },
-  columnSelectorContainer: {
-    padding: 5,
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   disc: {
-    width: 50,
-    height: 50,
+    width: 35,
+    height: 35,
     padding: 5,
-  }
+  },
+  cell: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 48,
+    height: 48,
+    borderWidth: 4,
+    borderColor: '#666',
+    borderStyle: 'solid',
+  },
 });
 
 export default ConnectFourBoard;
