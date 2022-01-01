@@ -73,12 +73,10 @@ const ConnectFour = {
       }
     },
   },
-  flow: {
-    endGameIf: (G, ctx) => {
-      if (IsVictory(G.grid, ctx.currentPlayer)) {
-        return { winner: ctx.currentPlayer };
-      }
-    },
+  endIf: (G, ctx) => {
+    if (IsVictory(G.grid, ctx.currentPlayer)) {
+      return { winner: ctx.currentPlayer };
+    }
   },
 };
 

@@ -7,13 +7,13 @@ import TicTacToe from './tictactoe';
 import TicTacToeBoard from './tictactoe/board';
 import ConnectFour from './connectfour';
 import ConnectFourBoard from './connectfour/board';
+import { StyledButton } from '../../components/StyledButton';
 
 const TicTacView = Client({
   game: TicTacToe,
   board: TicTacToeBoard,
 });
 
-// Replace with implementation
 const ConnectFourView = Client({
   game: ConnectFour,
   board: ConnectFourBoard,

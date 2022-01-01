@@ -9,6 +9,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import PropTypes from 'prop-types';
+import { StyledButton } from '../../../components/StyledButton';
 
 const Board = ({
   ctx,
@@ -18,6 +19,7 @@ const Board = ({
   moves,
   playerID,
   isActive,
+  reset,
 }) => {
   const numOfRows = 3;
   const numOfColumns = 3;
@@ -85,6 +87,7 @@ const Board = ({
           </Text>
         )}
       </View>
+      <StyledButton onPress={() => reset()} text="Restart Game" />
     </View>
   );
 }

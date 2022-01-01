@@ -6,12 +6,14 @@ import { emptyCell, numOfColumns, numOfRows, p1disc, p2disc, playerDiscLookup } 
 import WhiteDisc from '../../../assets/images/circular-shape-silhouette-white.png';
 import BlueDisc from '../../../assets/images/circular-shape-silhouette-blue.png';
 import RedDisc from '../../../assets/images/circular-shape-silhouette-red.png';
+import { StyledButton } from '../../../components/StyledButton';
 
 const ConnectFourBoard = ({
   ctx,
   moves,
   events,
   G,
+  reset,
 }) => {
   const onClick = (columnIdx) => {
     if (isActiveCheck(columnIdx)) {
@@ -36,12 +38,12 @@ const ConnectFourBoard = ({
           : <Text>Current Player: Player {playerDiscLookup[ctx.currentPlayer]}</Text>}
       </View>
       <Grid handleClick={onClick} grid={G.grid} />
+      <StyledButton onPress={() => reset()} text="Restart Game" />
     </View>
   );
 }
 
 const Grid = ({ grid, handleClick }) => {
-  console.log(grid);
   const cells = [];
   for (let row = 0; row < numOfRows; row++) {
     cells.push(

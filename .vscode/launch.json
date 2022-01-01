@@ -8,7 +8,9 @@
       "name": "Attach to packager",
       "cwd": "${workspaceFolder}",
       "type": "reactnative",
-      "request": "attach"
+      "request": "attach",
+      "port": 19000, //Port number may be different in your machine
+      "sourceMaps": true
     },
     {
       "name": "Debug in Exponent",
