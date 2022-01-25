@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import { StyledButton } from '../../../components/StyledButton';
 
@@ -66,6 +66,13 @@ const Board = ({
     return true;
   }
 
+  const handleSharePressed = () => {
+    Alert.alert('Share Your Game', 'Your unique code is:\n0xDEADBEEF\n\nTell your friends to join with this code!', [
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ])
+  };
+
+
   return (
     <View>
       <View id="board">{tbody}</View>
@@ -87,7 +94,8 @@ const Board = ({
           </Text>
         )}
       </View>
-      <StyledButton onPress={() => reset()} text="Restart Game" />
+      <StyledButton onPress={reset} text="Restart Game" />
+      <StyledButton onPress={handleSharePressed} text="Share Game" />
     </View>
   );
 }

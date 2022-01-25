@@ -31,7 +31,7 @@ const IsVictory = (cells) => {
   return false;
 }
 
-const TicTacToe = {
+export const TicTacToe = {
   name: 'tic-tac-toe',
   setup: () => ({
     cells: new Array(9).fill(null),
