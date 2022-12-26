@@ -22,13 +22,13 @@ const ConnectFourView = Client({
   board: ConnectFourBoard,
 });
 
-const MultiPlayer = ({ gameKey }) => {
+const MultiPlayer = ({ gameKey, playerID }) => {
   return (
     <View style={styles.container}>
       {gameKey === "tictactoe" && (
         <>
-          <TicTacView playerID="0" matchID="multi" />
-          <TicTacView playerID="1" matchID="multi" />
+          <TicTacView playerID={playerID} matchID="multi" />
+          {/* <TicTacView playerID={playerID} matchID="multi" /> */}
         </>
       )}
       {gameKey === "connectfour" && <ConnectFourView matchID="single" />}

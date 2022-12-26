@@ -57,7 +57,7 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator({ route }) {
-  const { gameKey, gameName } = route.params;
+  const { gameKey, gameName, playerID } = route.params;
   const colorScheme = useColorScheme();
 
   return (
@@ -93,7 +93,7 @@ function BottomTabNavigator({ route }) {
           ),
         })}
       >
-        {props => <TabOneScreen {...props} gameKey={gameKey} gameName={gameName} />}
+        {props => <TabOneScreen {...props} gameKey={gameKey} gameName={gameName} playerID={playerID} />}
       </BottomTab.Screen>
       <BottomTab.Screen
         name="TabTwo"

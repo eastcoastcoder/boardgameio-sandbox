@@ -4,6 +4,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
+    "server": "node -r esm server.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -20,6 +21,7 @@
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "boardgame.io": "^0.50.2",
+    "esm": "^3.2.25",
     "expo": "~47.0.9",
     "expo-asset": "~8.7.0",
     "expo-constants": "~14.0.2",

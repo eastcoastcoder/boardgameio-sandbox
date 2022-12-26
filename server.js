@@ -1,5 +1,5 @@
 import { Server, Origins } from 'boardgame.io/server';
-import { TicTacToe } from './tictactoe';
+import { TicTacToe } from './screens/games/tictactoe';
 
 const PORT = process.env.PORT || 8000;
 const server = Server({

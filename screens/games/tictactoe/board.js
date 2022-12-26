@@ -74,7 +74,7 @@ const Board = ({
         {!ctx.gameover && <Text>{`Player ${Number(ctx.currentPlayer) + 1}'s Turn`}</Text>}
         {playerID !== null && (
           <Text id="player" style={styles.infoText}>
-            Player: {playerID}
+            Player: {Number(playerID) + 1}
           </Text>
         )}
         {ctx.gameover !== undefined && (

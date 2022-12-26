@@ -29,6 +29,7 @@ export type TabOneProp = {
   navigation: TabOneNavigationProp;
   gameKey: string;
   gameName: string;
+  playerID: string;
 }
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
