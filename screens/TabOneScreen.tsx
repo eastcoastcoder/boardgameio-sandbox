@@ -1,10 +1,11 @@
 import * as React from 'react';
 
-import { RootTabScreenProps } from '../types';
-import Singleplayer from './games/SinglePlayer';
+import { RootTabScreenProps, TabOneProp } from '../types';
+// import SinglePlayer from './games/SinglePlayer';
+import MultiPlayer from './games/MultiPlayer';
 
-export default function TabOneScreen({ navigation, gameKey, gameName }: RootTabScreenProps<'TabOne'>) {
+export default function TabOneScreen({ navigation, gameKey, gameName, ...rest }: TabOneProp) {
   return (
-    <Singleplayer gameKey={gameKey} gameName={gameName} />
+    <MultiPlayer gameKey={gameKey} gameName={gameName} />
   );
 }

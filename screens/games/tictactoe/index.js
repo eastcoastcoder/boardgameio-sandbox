@@ -17,18 +17,12 @@ const IsVictory = (cells) => {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  for (let pos of positions) {
-    const symbol = cells[pos[0]];
-    let winner = symbol;
-    for (let i of pos) {
-      if (cells[i] != symbol) {
-        winner = null;
-        break;
-      }
-    }
-    if (winner != null) return true;
-  }
-  return false;
+  const isRowComplete = (row) => {
+    const symbols = row.map((i) => cells[i]);
+    return symbols.every((i) => i !== null && i === symbols[0]);
+  };
+
+  return positions.map(isRowComplete).some((i) => i === true);
 }
 
 export const TicTacToe = {
@@ -37,10 +31,10 @@ export const TicTacToe = {
     cells: new Array(9).fill(null),
   }),
   moves: {
-    clickCell(G, ctx, id) {
+    clickCell({ G, playerID }, id) {
       const cells = [...G.cells];
       if (cells[id] === null) {
-        cells[id] = ctx.currentPlayer;
+        cells[id] = playerID;
       }
       return { ...G, cells };
     },
@@ -49,9 +43,13 @@ export const TicTacToe = {
     minMoves: 1,
     maxMoves: 1,
   },
-  endIf: (G, ctx) => {
+  endIf: ({ G, ctx }) => {
     if (IsVictory(G.cells)) {
       return ctx.currentPlayer;
+    }
+    const isDraw = G.cells.filter((c) => c === null).length == 0;
+    if (isDraw) {
+      return { draw: true };
     }
   },
 };

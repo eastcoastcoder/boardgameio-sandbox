@@ -1,9 +1,10 @@
-import { Server } from 'boardgame.io/server';
+import { Server, Origins } from 'boardgame.io/server';
 import { TicTacToe } from './tictactoe';
 
 const PORT = process.env.PORT || 8000;
 const server = Server({
   games: [TicTacToe],
+  origins: [Origins.LOCALHOST],
 });
 
 server.router.get('/custom', (ctx, next) => {

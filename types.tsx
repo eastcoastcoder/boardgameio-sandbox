@@ -4,7 +4,7 @@
  */
 
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
+import { CompositeScreenProps, NavigatorScreenParams, RouteProp } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 declare global {
@@ -18,7 +18,18 @@ export type RootStackParamList = {
   Modal: undefined;
   NotFound: undefined;
   Start: undefined;
+  TabOne: undefined;
 };
+
+type TabOneRouteProp = RouteProp<RootStackParamList, 'TabOne'>;
+type TabOneNavigationProp = BottomTabScreenProps<RootStackParamList, 'TabOne'>;
+
+export type TabOneProp = {
+  route: TabOneRouteProp;
+  navigation: TabOneNavigationProp;
+  gameKey: string;
+  gameName: string;
+}
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
   RootStackParamList,

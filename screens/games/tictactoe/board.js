@@ -1,15 +1,7 @@
-/*
- * Copyright 2018 The boardgame.io Authors.
- *
- * Use of this source code is governed by a MIT-style
- * license that can be found in the LICENSE file or at
- * https://opensource.org/licenses/MIT.
- */
-
-import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View, Alert } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { StyledButton } from '../../../components/StyledButton';
+import universalAlert from '../../../utils/universalAlert';
 
 const Board = ({
   ctx,
@@ -31,6 +23,8 @@ const Board = ({
     0: 'X',
     1: 'O',
   };
+
+  if (!G) return <></>;
 
   for (let row = 0; row < numOfRows; row++) {
     const cells = [];
@@ -67,7 +61,7 @@ const Board = ({
   }
 
   const handleSharePressed = () => {
-    Alert.alert('Share Your Game', 'Your unique code is:\n0xDEADBEEF\n\nTell your friends to join with this code!', [
+    universalAlert('Share Your Game', 'Your unique code is:\n0xDEADBEEF\n\nTell your friends to join with this code!', [
       { text: 'OK', onPress: () => console.log('OK Pressed') },
     ])
   };

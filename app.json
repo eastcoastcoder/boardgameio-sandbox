@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "boardgame",
+    "slug": "boardgame",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -29,8 +29,6 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    },
-    "sdkVersion": "43.0.0",
-    "entryPoint": ".vscode/exponentIndex.js"
+    }
   }
 }

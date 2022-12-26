@@ -64,7 +64,7 @@ const ConnectFour = {
     return ({ grid: grid });
   },
   moves: {
-    selectColumn(G, ctx, columnIdx) {
+    selectColumn({ G, ctx }, columnIdx) {
       for (var rowIdx = numOfRows - 1; rowIdx >= 0; rowIdx--) {
         if (G.grid[rowIdx][columnIdx] === emptyCell) {
           G.grid[rowIdx][columnIdx] = playerDiscLookup[ctx.currentPlayer];
@@ -73,7 +73,7 @@ const ConnectFour = {
       }
     },
   },
-  endIf: (G, ctx) => {
+  endIf: ({ G, ctx }) => {
     if (IsVictory(G.grid, ctx.currentPlayer)) {
       return { winner: ctx.currentPlayer };
     }
